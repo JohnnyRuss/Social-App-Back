@@ -82,14 +82,11 @@ exports.getConversation = asyncWrapper(async (req, res, next) => {
   let conversation;
 
   if (!conversationId) {
-    console.log('entered in no conversation id');
     conversation = await Conversation.findOne({
       members: [id, adressatId],
     }).populate('messages');
 
     if (!conversation) {
-      console.log('entered in no conversation');
-
       const users = await User.find({
         _id: { $in: [id, adressatId] },
       }).select('profileImg userName');
