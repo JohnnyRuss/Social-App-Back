@@ -49,8 +49,6 @@ exports.logInUser = asyncWrapper(async (req, res, next) => {
     '+password userName firstName lastName profileImg role'
   );
 
-  console.log(user);
-
   if (!user) user = await checkDeactivatedUser(email, next);
 
   if (!user) return next(new AppError(401, 'incorect email or password'));
